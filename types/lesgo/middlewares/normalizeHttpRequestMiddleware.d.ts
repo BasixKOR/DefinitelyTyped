@@ -1,5 +1,5 @@
-import { MiddlewareFunction } from 'middy';
-import { APIGatewayEvent } from 'aws-lambda';
+import middy from '@middy/core';
+import { APIGatewayEvent, Context } from 'aws-lambda';
 
 export interface HttpGatewayEvent extends APIGatewayEvent {
     input?: Record<string, any> | null | string;
@@ -9,7 +9,7 @@ export interface HttpGatewayEvent extends APIGatewayEvent {
 }
 
 export interface NormalizeHttpMiddleware {
-    before: MiddlewareFunction<HttpGatewayEvent, any>;
+    before: middy.MiddlewareFunction<HttpGatewayEvent, any>;
 }
 
 export default function normalizeHttpRequestMiddleware(): NormalizeHttpMiddleware;

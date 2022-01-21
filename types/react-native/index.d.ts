@@ -19,7 +19,6 @@
 //                 Ceyhun Ozugur <https://github.com/ceyhun>
 //                 Mike Martin <https://github.com/mcmar>
 //                 Theo Henry de Villeneuve <https://github.com/theohdv>
-//                 Eli White <https://github.com/TheSavior>
 //                 Romain Faust <https://github.com/romain-faust>
 //                 Be Birchall <https://github.com/bebebebebe>
 //                 Jesse Katsumata <https://github.com/Naturalclar>
@@ -6343,6 +6342,12 @@ export interface ScrollViewPropsIOS {
      * The default value is true.
      */
     automaticallyAdjustContentInsets?: boolean | undefined; // true
+
+    /**
+     * Controls whether iOS should automatically adjust the scroll indicator
+     * insets. The default value is true. Available on iOS 13 and later.
+     */
+    automaticallyAdjustsScrollIndicatorInsets?: boolean | undefined;
 
     /**
      * When true the scroll view bounces when it reaches the end of the
