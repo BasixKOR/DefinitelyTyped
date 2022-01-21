@@ -18,7 +18,6 @@ import {
     HostedFieldsStateObject,
     HostedFieldsBinPayload,
 } from './modules/hosted-fields';
-import { LocalPayment, LocalPaymentTokenizePayload, LocalPaymentTypes } from './modules/local-payment';
 import { PayPal, PayPalTokenizePayload } from './modules/paypal';
 import { PayPalCheckout, PayPalCheckoutCreatePaymentOptions } from './modules/paypal-checkout';
 import { ThreeDSecure, ThreeDSecureVerifyPayload } from './modules/three-d-secure';
@@ -38,7 +37,6 @@ export const client: Client;
 export const dataCollector: DataCollector;
 export const googlePayment: GooglePayment;
 export const hostedFields: HostedFields;
-export const localPayment: LocalPayment;
 export const paypal: PayPal;
 export const paypalCheckout: PayPalCheckout;
 export const threeDSecure: ThreeDSecure;
@@ -67,9 +65,6 @@ export {
     HostedFieldsTokenizePayload,
     HostedFieldsEvent,
     HostedFieldsStateObject,
-    LocalPayment,
-    LocalPaymentTypes,
-    LocalPaymentTokenizePayload,
     PayPal,
     PayPalTokenizePayload,
     PayPalCheckout,

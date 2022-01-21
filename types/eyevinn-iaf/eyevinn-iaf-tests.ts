@@ -1,5 +1,6 @@
-import { IafUploadModule, IafFileWatchModule, Logger } from 'eyevinn-iaf';
+import { IafUploadModule, IafFileWatchModule } from 'eyevinn-iaf';
 import { Readable } from 'stream';
+import { Logger } from 'winston';
 
 class FileUploader implements IafUploadModule {
     logger: Logger;

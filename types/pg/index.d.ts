@@ -31,7 +31,6 @@ export interface ClientConfig {
     application_name?: string | undefined;
     connectionTimeoutMillis?: number | undefined;
     types?: CustomTypesConfig | undefined;
-    options?: string | undefined;
 }
 
 export type ConnectionConfig = ClientConfig;

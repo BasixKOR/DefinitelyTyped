@@ -1017,7 +1017,6 @@ function test_require_fluentParams() {
 
     instance.bail(true)
         .bail()
-        .cleanReferencesAfterRun(true)
         .addFile('foo.js')
         .reporter('dot')
         .ui('bdd')

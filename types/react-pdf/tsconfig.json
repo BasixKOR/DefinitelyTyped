@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2015",
         "lib": [
             "es6",
             "dom"
@@ -17,8 +16,7 @@
         "types": [],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true,
-        "jsx": "react",
-        "target": "es6"
+        "jsx": "react"
     },
     "files": [
         "index.d.ts",

@@ -88,7 +88,6 @@ export interface CalendarTileProperties {
 }
 
 export interface ViewCallbackProperties {
-    action: string;
     activeStartDate: Date;
     value: Date;
     view: Detail;

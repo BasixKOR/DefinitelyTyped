@@ -8,9 +8,6 @@ import normalizeSQSMessageMiddleware from 'lesgo/middlewares/normalizeSQSMessage
 import LesgoException from 'lesgo/exceptions/LesgoException';
 
 import ElasticCacheService from 'lesgo/services/ElasticCacheService';
-import AuroraDbRDSProxyService from 'lesgo/services/AuroraDbRDSProxyService';
-import AuroraDbService from 'lesgo/services/AuroraDbService';
-
 import './tests/services/ElasticsearchService';
 import './tests/services/AuroraDbService';
 import './tests/services/DynamoDbService';
@@ -85,10 +82,9 @@ decrypt('TMxLqkHSs8D7tD02ptbtWQxocJO93ZPvqS4IruHEpj8='); // $ExpectType string
 hash('this is a test'); // $ExpectType Buffer
 hashMD5(new Uint8Array([21, 31])); // $ExpectType Buffer
 
-db; // $ExpectType AuroraDbService | AuroraDbRDSProxyService
+db; // $ExpectType AuroraDbService
 (async () => {
-    await (db as AuroraDbService).select('SELECT * FROM users;', []); // $ExpectType any[]
-    await (db as AuroraDbRDSProxyService).select('SELECT * FROM users;', []); // $ExpectType AuroraDbRDSProxyServiceResult
+    await db.select('SELECT * FROM users;', []); // $ExpectType any[]
 })();
 dynamodb; // $ExpectType DynamoDb
 (async () => {

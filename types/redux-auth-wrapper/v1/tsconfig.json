@@ -15,6 +15,12 @@
         ],
         "types": [],
         "paths": {
+            "history": [
+                "history/v3"
+            ],
+            "history/*": [
+                "history/v3/*"
+            ],
             "redux-auth-wrapper": [
                 "redux-auth-wrapper/v1"
             ]

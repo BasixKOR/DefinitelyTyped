@@ -13,12 +13,12 @@ export type Readable = import('stream').Readable;
 export class ImapFlow extends EventEmitter {
     constructor(options: ImapFlowOptions);
     authenticated: string | boolean;
-    capabilities: Map<string, (boolean|number)>;
+    capabilities: string | boolean;
     emitLogs: boolean;
     enabled: Set<string>;
     id: string;
     idling: boolean;
-    mailbox: MailboxObject | boolean;
+    mailbox: MailboxObject;
     secureConnection: boolean;
     serverInfo: IdInfoObject;
     usable: boolean;

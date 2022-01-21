@@ -11,7 +11,6 @@ new WebpackAssetsManifest({
             value: asset && asset.info.integrity,
         };
     },
-    extra: {},
 });
 
 /** https://github.com/webdeveric/webpack-assets-manifest/blob/master/examples/aws-s3-data-integrity.js */
@@ -26,9 +25,6 @@ new WebpackAssetsManifest({
             key: entry.value,
             value: asset && asset.info.md5.substr(4),
         };
-    },
-    extra: {
-        test: true,
     },
 });
 

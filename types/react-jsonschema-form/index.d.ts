@@ -10,6 +10,7 @@
 //                 Saad Tazi <https://github.com/saadtazi>
 //                 Agustin N. R. Ramirez <https://github.com/agustin107>
 //                 Chancellor Clark <https://github.com/chanceaclark>
+//                 Benoît Sepe <https://github.com/ogdentrod>
 //                 Andre Nguyen <https://github.com/andrenguyener>
 //                 Qingqi Shi <https://github.com/qingqishi>
 //                 Jonathan Southern <https://github.com/JonathanSouthern>

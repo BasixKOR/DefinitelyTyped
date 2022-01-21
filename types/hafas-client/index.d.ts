@@ -1,4 +1,4 @@
-// Type definitions for hafas-client 5.22
+// Type definitions for hafas-client 5.12
 // Project: https://github.com/public-transport/hafas-client
 // Definitions by: Jürgen Bergmann <https://github.com/bergmannjg>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -30,30 +30,28 @@ declare namespace createClient {
         timezone: string;
         endpoint: string;
         products: ReadonlyArray<ProductType>;
-        trip?: boolean;
-        radar?: boolean;
-        refreshJourney?: boolean;
-        journeysFromTrip?: boolean;
-        reachableFrom?: boolean;
-        journeysWalkingSpeed?: boolean;
-        tripsByName?: boolean;
-        remarks?: boolean;
-        remarksGetPolyline?: boolean;
-        lines?: boolean;
+        trip?: boolean | undefined;
+        radar?: boolean | undefined;
+        refreshJourney?: boolean | undefined;
+        reachableFrom?: boolean | undefined;
+        journeysWalkingSpeed?: boolean | undefined;
+        tripsByName?: boolean | undefined;
+        remarks?: boolean | undefined;
+        lines?: boolean | undefined;
     }
     /**
      * A location object is used by other items to indicate their locations.
      */
     interface Location {
         type: 'location';
-        id?: string;
-        name?: string;
-        poi?: boolean;
-        address?: string;
-        longitude?: number;
-        latitude?: number;
-        altitude?: number;
-        distance?: number;
+        id?: string | undefined;
+        name?: string | undefined;
+        poi?: boolean | undefined;
+        address?: string | undefined;
+        longitude?: number | undefined;
+        latitude?: number | undefined;
+        altitude?: number | undefined;
+        distance?: number | undefined;
     }
     /** Each public transportation network exposes its products as boolean properties. See {@link ProductType} */
     interface Products {
@@ -63,13 +61,13 @@ declare namespace createClient {
         [product: string]: string | boolean;
     }
     interface ReisezentrumOpeningHours {
-        Mo?: string;
-        Di?: string;
-        Mi?: string;
-        Do?: string;
-        Fr?: string;
-        Sa?: string;
-        So?: string;
+        Mo?: string | undefined;
+        Di?: string | undefined;
+        Mi?: string | undefined;
+        Do?: string | undefined;
+        Fr?: string | undefined;
+        Sa?: string | undefined;
+        So?: string | undefined;
     }
     /**
      * A station is a larger building or area that can be identified by a name.
@@ -79,21 +77,20 @@ declare namespace createClient {
      */
     interface Station {
         type: 'station';
-        id?: string;
-        name?: string;
-        station?: Station;
-        location?: Location;
-        products?: Products;
-        lines?: ReadonlyArray<Line>;
-        isMeta?: boolean;
+        id?: string | undefined;
+        name?: string | undefined;
+        station?: Station | undefined;
+        location?: Location | undefined;
+        products?: Products | undefined;
+        isMeta?: boolean | undefined;
         /** region ids */
-        regions?: ReadonlyArray<string>;
-        facilities?: Facilities;
-        reisezentrumOpeningHours?: ReisezentrumOpeningHours;
-        stops?: ReadonlyArray<Station | Stop | Location>;
-        entrances?: ReadonlyArray<Location>;
-        transitAuthority?: string;
-        distance?: number;
+        regions?: ReadonlyArray<string> | undefined;
+        facilities?: Facilities | undefined;
+        reisezentrumOpeningHours?: ReisezentrumOpeningHours | undefined;
+        stops?: ReadonlyArray<Station | Stop | Location> | undefined;
+        entrances?: ReadonlyArray<Location> | undefined;
+        transitAuthority?: string | undefined;
+        distance?: number | undefined;
     }
     /**
      * Ids of a Stop, i.e. dhid as 'DELFI Haltestellen ID'
@@ -107,19 +104,18 @@ declare namespace createClient {
      */
     interface Stop {
         type: 'stop';
-        id?: string;
-        name?: string;
-        location?: Location;
-        station?: Station;
-        products?: Products;
-        lines?: ReadonlyArray<Line>;
-        isMeta?: boolean;
-        reisezentrumOpeningHours?: ReisezentrumOpeningHours;
-        ids?: Ids;
-        loadFactor?: string;
-        entrances?: ReadonlyArray<Location>;
-        transitAuthority?: string;
-        distance?: number;
+        id?: string | undefined;
+        name?: string | undefined;
+        location?: Location | undefined;
+        products?: Products | undefined;
+        lines?: ReadonlyArray<Line> | undefined;
+        isMeta?: boolean | undefined;
+        reisezentrumOpeningHours?: ReisezentrumOpeningHours | undefined;
+        ids?: Ids | undefined;
+        loadFactor?: string | undefined;
+        entrances?: ReadonlyArray<Location> | undefined;
+        transitAuthority?: string | undefined;
+        distance?: number | undefined;
     }
     /**
      * A region is a group of stations, for example a metropolitan area or a geographical or cultural region.
@@ -133,24 +129,23 @@ declare namespace createClient {
     }
     interface Line {
         type: 'line';
-        id?: string;
-        name?: string;
-        adminCode?: string;
-        fahrtNr?: string;
-        additionalName?: string;
-        product?: string;
-        public?: boolean;
-        mode?: 'train' | 'bus' | 'watercraft' | 'taxi' | 'gondola' | 'aircraft' | 'car' | 'bicycle' | 'walking';
+        id?: string | undefined;
+        name?: string | undefined;
+        adminCode?: string | undefined;
+        fahrtNr?: string | undefined;
+        additionalName?: string | undefined;
+        product?: string | undefined;
+        public?: boolean | undefined;
+        mode?: 'train' | 'bus' | 'watercraft' | 'taxi' | 'gondola' | 'aircraft' | 'car' | 'bicycle' | 'walking' | undefined;
         /** routes ids */
-        routes?: ReadonlyArray<string>;
-        operator?: Operator;
-        express?: boolean;
-        metro?: boolean;
-        night?: boolean;
-        nr?: number;
-        symbol?: string;
-        directions?: ReadonlyArray<string>;
-        productName?: string;
+        routes?: ReadonlyArray<string> | undefined;
+        operator?: Operator | undefined;
+        express?: boolean | undefined;
+        metro?: boolean | undefined;
+        night?: boolean | undefined;
+        nr?: number | undefined;
+        symbol?: string | undefined;
+        directions?: ReadonlyArray<string> | undefined;
     }
     /**
      * A route represents a single set of stations, of a single line.
@@ -164,13 +159,13 @@ declare namespace createClient {
         stops: ReadonlyArray<string>;
     }
     interface Cycle {
-        min?: number;
-        max?: number;
-        nr?: number;
+        min?: number | undefined;
+        max?: number | undefined;
+        nr?: number | undefined;
     }
     interface ArrivalDeparture {
-        arrival?: number;
-        departure?: number;
+        arrival?: number | undefined;
+        departure?: number | undefined;
     }
     /**
      * There are many ways to format schedules of public transport routes.
@@ -193,56 +188,30 @@ declare namespace createClient {
     }
     interface Hint {
         type: 'hint' | 'status' | 'foreign-id' | 'local-fare-zone' | 'stop-website' | 'stop-dhid' | 'transit-authority';
-        code?: string;
-        summary?: string;
+        code?: string | undefined;
+        summary?: string | undefined;
         text: string;
-        tripId?: string;
-    }
-    interface Status {
-        type: 'hint' | 'status' | 'foreign-id' | 'local-fare-zone' | 'stop-website' | 'stop-dhid' | 'transit-authority';
-        code?: string;
-        summary?: string;
-        text: string;
-        tripId?: string;
-    }
-    interface IcoCrd {
-        x: number;
-        y: number;
-        type?: string;
-    }
-    interface Edge {
-        fromLoc?: Station | Stop | Location;
-        toLoc?: Station | Stop | Location;
-        icon?: object;
-        dir?: number;
-        icoCrd?: IcoCrd;
-    }
-    interface Event {
-        fromLoc?: Station | Stop | Location;
-        toLoc?: Station | Stop | Location;
-        start?: string;
-        end?: string;
-        sections?: string[];
+        tripId?: string | undefined;
     }
     interface Warning {
         type: 'status' | 'warning';
-        id?: string;
-        icon?: object;
-        summary?: string;
-        text?: string;
-        category?: string | number;
-        priority?: number;
-        products?: Products;
-        edges?: Edge[];
-        events?: Event[];
-        validFrom?: string | number;
-        validUntil?: string | number;
-        modified?: string | number;
-        company?: string;
-        categories?: number[];
-        affectedLines?: Line[];
-        fromStops?: ReadonlyArray<Station | Stop | Location>;
-        toStops?: ReadonlyArray<Station | Stop | Location>;
+        id?: number | undefined;
+        icon?: string | undefined;
+        summary?: string | undefined;
+        text: string;
+        category?: string | undefined;
+        priority?: number | undefined;
+        products?: Products | undefined;
+        edges?: any[] | undefined;
+        events?: any[] | undefined;
+        validFrom?: string | undefined;
+        validUntil?: string | undefined;
+        modified?: string | undefined;
+        company?: any;
+        categories?: any[] | undefined;
+        affectedLines?: Line[] | undefined;
+        fromStops?: any[] | undefined;
+        toStops?: any[] | undefined;
     }
     interface Geometry {
         type: 'Point';
@@ -250,7 +219,7 @@ declare namespace createClient {
     }
     interface Feature {
         type: 'Feature';
-        properties: object;
+        properties?: Station | Stop | object | undefined;
         geometry: Geometry;
     }
     interface FeatureCollection {
@@ -261,133 +230,128 @@ declare namespace createClient {
      * A stopover represents a vehicle stopping at a stop/station at a specific time.
      */
     interface StopOver {
-        stop?: Station | Stop;
+        stop: Station | Stop;
         /** null, if last stopOver of trip */
-        departure?: string;
-        departureDelay?: number;
-        prognosedDeparture?: string;
-        plannedDeparture?: string;
-        departurePlatform?: string;
-        prognosedDeparturePlatform?: string;
-        plannedDeparturePlatform?: string;
+        departure?: string | undefined;
+        departureDelay?: number | undefined;
+        prognosedDeparture?: string | undefined;
+        plannedDeparture?: string | undefined;
+        departurePlatform?: string | undefined;
+        prognosedDeparturePlatform?: string | undefined;
+        plannedDeparturePlatform?: string | undefined;
         /** null, if first stopOver of trip */
-        arrival?: string;
-        arrivalDelay?: number;
-        prognosedArrival?: string;
-        plannedArrival?: string;
-        arrivalPlatform?: string;
-        prognosedArrivalPlatform?: string;
-        plannedArrivalPlatform?: string;
-        remarks?: ReadonlyArray<Hint | Status | Warning>;
-        passBy?: boolean;
-        cancelled?: boolean;
+        arrival?: string | undefined;
+        arrivalDelay?: number | undefined;
+        prognosedArrival?: string | undefined;
+        plannedArrival?: string | undefined;
+        arrivalPlatform?: string | undefined;
+        prognosedArrivalPlatform?: string | undefined;
+        plannedArrivalPlatform?: string | undefined;
+        remarks?: ReadonlyArray<Hint | Warning> | undefined;
+        passBy?: boolean | undefined;
+        cancelled?: boolean | undefined;
     }
     /**
      * Trip – a vehicle stopping at a set of stops at specific times
      */
     interface Trip {
         id: string;
-        origin?: Station | Stop | Location;
-        destination?: Station | Stop | Location;
-        departure?: string;
-        plannedDeparture?: string;
-        prognosedArrival?: string;
-        departureDelay?: number;
-        departurePlatform?: string;
-        prognosedDeparturePlatform?: string;
-        plannedDeparturePlatform?: string;
-        arrival?: string;
-        plannedArrival?: string;
-        prognosedDeparture?: string;
-        arrivalDelay?: number;
-        arrivalPlatform?: string;
-        prognosedArrivalPlatform?: string;
-        plannedArrivalPlatform?: string;
-        stopovers?: ReadonlyArray<StopOver>;
-        schedule?: number;
-        price?: Price;
-        operator?: number;
-        direction?: string;
-        line?: Line;
-        reachable?: boolean;
-        cancelled?: boolean;
-        walking?: boolean;
-        loadFactor?: string;
-        distance?: number;
-        public?: boolean;
-        transfer?: boolean;
-        cycle?: Cycle;
-        alternatives?: ReadonlyArray<Alternative>;
-        polyline?: FeatureCollection;
-        remarks?: ReadonlyArray<Hint | Status | Warning>;
+        origin: Station | Stop;
+        destination: Station | Stop;
+        departure?: string | undefined;
+        plannedDeparture?: string | undefined;
+        prognosedArrival?: string | undefined;
+        departureDelay?: number | undefined;
+        departurePlatform?: string | undefined;
+        prognosedDeparturePlatform?: string | undefined;
+        plannedDeparturePlatform?: string | undefined;
+        arrival?: string | undefined;
+        plannedArrival?: string | undefined;
+        prognosedDeparture?: string | undefined;
+        arrivalDelay?: number | undefined;
+        arrivalPlatform?: string | undefined;
+        prognosedArrivalPlatform?: string | undefined;
+        plannedArrivalPlatform?: string | undefined;
+        stopovers?: ReadonlyArray<StopOver> | undefined;
+        schedule?: number | undefined;
+        price?: Price | undefined;
+        operator?: number | undefined;
+        direction?: string | undefined;
+        line?: Line | undefined;
+        reachable?: boolean | undefined;
+        cancelled?: boolean | undefined;
+        walking?: boolean | undefined;
+        loadFactor?: string | undefined;
+        distance?: number | undefined;
+        public?: boolean | undefined;
+        transfer?: boolean | undefined;
+        cycle?: Cycle | undefined;
+        alternatives?: ReadonlyArray<Alternative> | undefined;
+        polyline?: FeatureCollection | undefined;
+        remarks?: ReadonlyArray<Hint | Warning> | undefined;
     }
     interface Price {
         amount: number;
         currency: string;
-        hint?: string;
+        hint?: string | undefined;
     }
     interface Alternative {
         tripId: string;
-        direction?: string;
-        location?: Location;
-        line?: Line;
-        stop?: Station | Stop;
-        when?: string;
-        plannedWhen?: string;
-        prognosedWhen?: string;
-        delay?: number;
-        platform?: string;
-        plannedPlatform?: string;
-        prognosedPlatform?: string;
-        remarks?: ReadonlyArray<Hint | Status | Warning>;
-        cancelled?: boolean;
-        loadFactor?: string;
-        provenance?: string;
-        previousStopovers?: ReadonlyArray<StopOver>;
-        nextStopovers?: ReadonlyArray<StopOver>;
-        frames?: Frame[];
-        polyline?: FeatureCollection;
-        currentTripPosition?: Location;
+        direction?: string | undefined;
+        line?: Line | undefined;
+        stop?: Station | Stop | undefined;
+        when?: string | undefined;
+        plannedWhen?: string | undefined;
+        prognosedWhen?: string | undefined;
+        delay?: number | undefined;
+        platform?: string | undefined;
+        plannedPlatform?: string | undefined;
+        prognosedPlatform?: string | undefined;
+        remarks?: ReadonlyArray<Hint | Warning> | undefined;
+        cancelled?: boolean | undefined;
+        loadFactor?: string | undefined;
+        provenance?: string | undefined;
+        previousStopovers?: ReadonlyArray<StopOver> | undefined;
+        nextStopovers?: ReadonlyArray<StopOver> | undefined;
     }
     /**
      * Leg of journey
      */
     interface Leg {
-        tripId?: string;
-        origin?: Station | Stop | Location;
-        destination?: Station | Stop | Location;
-        departure?: string;
-        plannedDeparture?: string;
-        prognosedArrival?: string;
-        departureDelay?: number;
-        departurePlatform?: string;
-        prognosedDeparturePlatform?: string;
-        plannedDeparturePlatform?: string;
-        arrival?: string;
-        plannedArrival?: string;
-        prognosedDeparture?: string;
-        arrivalDelay?: number;
-        arrivalPlatform?: string;
-        prognosedArrivalPlatform?: string;
-        plannedArrivalPlatform?: string;
-        stopovers?: ReadonlyArray<StopOver>;
-        schedule?: number;
-        price?: Price;
-        operator?: number;
-        direction?: string;
-        line?: Line;
-        reachable?: boolean;
-        cancelled?: boolean;
-        walking?: boolean;
-        loadFactor?: string;
-        distance?: number;
-        public?: boolean;
-        transfer?: boolean;
-        cycle?: Cycle;
-        alternatives?: ReadonlyArray<Alternative>;
-        polyline?: FeatureCollection;
-        remarks?: ReadonlyArray<Hint | Status | Warning>;
-        currentLocation?: Location;
+        tripId?: string | undefined;
+        origin: Station | Stop;
+        destination: Station | Stop;
+        departure?: string | undefined;
+        plannedDeparture?: string | undefined;
+        prognosedArrival?: string | undefined;
+        departureDelay?: number | undefined;
+        departurePlatform?: string | undefined;
+        prognosedDeparturePlatform?: string | undefined;
+        plannedDeparturePlatform?: string | undefined;
+        arrival?: string | undefined;
+        plannedArrival?: string | undefined;
+        prognosedDeparture?: string | undefined;
+        arrivalDelay?: number | undefined;
+        arrivalPlatform?: string | undefined;
+        prognosedArrivalPlatform?: string | undefined;
+        plannedArrivalPlatform?: string | undefined;
+        stopovers?: ReadonlyArray<StopOver> | undefined;
+        schedule?: number | undefined;
+        price?: Price | undefined;
+        operator?: number | undefined;
+        direction?: string | undefined;
+        line?: Line | undefined;
+        reachable?: boolean | undefined;
+        cancelled?: boolean | undefined;
+        walking?: boolean | undefined;
+        loadFactor?: string | undefined;
+        distance?: number | undefined;
+        public?: boolean | undefined;
+        transfer?: boolean | undefined;
+        cycle?: Cycle | undefined;
+        alternatives?: ReadonlyArray<Alternative> | undefined;
+        polyline?: FeatureCollection | undefined;
+        remarks?: ReadonlyArray<Hint | Warning> | undefined;
     }
     interface ScheduledDays {
         [day: string]: boolean;
@@ -399,17 +363,17 @@ declare namespace createClient {
     interface Journey {
         type: 'journey';
         legs: ReadonlyArray<Leg>;
-        refreshToken?: string;
-        remarks?: ReadonlyArray<Hint | Status | Warning>;
-        price?: Price;
-        cycle?: Cycle;
-        scheduledDays?: ScheduledDays;
+        refreshToken?: string | undefined;
+        remarks?: ReadonlyArray<Hint | Warning> | undefined;
+        price?: Price | undefined;
+        cycle?: Cycle | undefined;
+        scheduledDays?: ScheduledDays | undefined;
     }
     interface Journeys {
-        earlierRef?: string;
-        laterRef?: string;
-        journeys?: ReadonlyArray<Journey>;
-        realtimeDataFrom?: number;
+        earlierRef?: string | undefined;
+        laterRef?: string | undefined;
+        journeys?: ReadonlyArray<Journey> | undefined;
+        realtimeDataFrom?: number | undefined;
     }
     interface Duration {
         duration: number;
@@ -418,488 +382,408 @@ declare namespace createClient {
     interface Frame {
         origin: Stop | Location;
         destination: Stop | Location;
-        t?: number;
+        t?: number | undefined;
     }
     interface Movement {
-        direction?: string;
-        tripId?: string;
-        line?: Line;
-        location?: Location;
-        nextStopovers?: ReadonlyArray<StopOver>;
-        frames?: ReadonlyArray<Frame>;
-        polyline?: FeatureCollection;
+        direction?: string | undefined;
+        tripId?: string | undefined;
+        line?: Line | undefined;
+        location?: Location | undefined;
+        nextStopovers?: ReadonlyArray<StopOver> | undefined;
+        frames?: ReadonlyArray<Frame> | undefined;
+        polyline?: FeatureCollection | undefined;
     }
     interface ServerInfo {
-        timetableStart?: string;
-        timetableEnd?: string;
-        serverTime?: string | number;
-        realtimeDataUpdatedAt?: number;
-    }
-    interface LoyaltyCard {
-        type: string;
-        discount?: number;
+        timetableStart?: string | undefined;
+        timetableEnd?: string | undefined;
+        serverTime?: string | number | undefined;
+        realtimeDataUpdatedAt?: number | undefined;
     }
     interface JourneysOptions {
         /**
          * departure date, undefined corresponds to Date.Now
          * @default undefined
          */
-        departure?: Date;
+        departure?: Date | undefined;
         /**
          * arrival date, departure and arrival are mutually exclusive.
          * @default undefined
          */
-        arrival?: Date;
+        arrival?: Date | undefined;
         /**
          * earlierThan, use {@link Journeys#earlierRef}, earlierThan and departure/arrival are mutually exclusive.
          * @default undefined
          */
-        earlierThan?: string;
+        earlierThan?: string | undefined;
         /**
          * laterThan, use {@link Journeys#laterRef}, laterThan and departure/arrival are mutually exclusive.
          *  @default undefined
          */
-        laterThan?: string;
+        laterThan?: string | undefined;
         /**
          * how many search results?
          * @default 3
          */
-        results?: number;
+        results?: number | undefined;
         /**
          * let journeys pass this station
          * @default undefined
          */
-        via?: string;
+        via?: string | undefined;
         /**
          * return stations on the way?
          * @default false
          */
-        stopovers?: boolean;
+        stopovers?: boolean | undefined;
         /**
          * Maximum nr of transfers. Default: Let HAFAS decide.
          * @default 10
          */
-        transfers?: number;
+        transfers?: number | undefined;
         /**
          * minimum time for a single transfer in minutes
          * @default 10
          */
-        transferTime?: number;
+        transferTime?: number | undefined;
         /**
          * 'none', 'partial' or 'complete'
          *  @default none
          */
-        accessibility?: string;
+        accessibility?: string | undefined;
         /**
          * only bike-friendly journeys
          * @default false
          */
-        bike?: boolean;
-        products?: Products;
+        bike?: boolean | undefined;
+        products?: Products | undefined;
         /**
          * return tickets? only available with some profiles
          * @default false
          */
-        tickets?: boolean;
+        tickets?: boolean | undefined;
         /**
          * return a shape for each leg?
          * @default false
          */
-        polylines?: boolean;
+        polylines?: boolean | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default false
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * parse & expose hints & warnings?
          * @default true
          */
-        remarks?: boolean;
+        remarks?: boolean | undefined;
         /**
          * 'slow', 'normal', 'fast'
          * @default slow
          */
-        walkingSpeed?: string;
+        walkingSpeed?: string | undefined;
         /**
          * start with walking
          * @default false
          */
-        startWithWalking?: boolean;
+        startWithWalking?: boolean | undefined;
         /**
          * language to get results in
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
         /**
          * parse which days each journey is valid on
          * @default false
          */
-        scheduledDays?: boolean;
-        /**
-         * firstClass
-         * @default false
-         */
-        firstClass?: boolean;
-        /**
-         *  LoyaltyCard
-         *  @default none
-         */
-        loyaltyCard?: LoyaltyCard;
+        scheduledDays?: boolean | undefined;
         /**
          * @deprecated
          */
-        when?: Date;
-    }
-    interface JourneysFromTripOptions {
-        /**
-         * return stations on the way?
-         * @default false
-         */
-        stopovers?: boolean;
-        /**
-         * minimum time for a single transfer in minutes
-         * @default 0
-         */
-        transferTime?: number;
-        /**
-         * 'none', 'partial' or 'complete'
-         * @default 'none'
-         */
-        accessibility?: string;
-        /**
-         * return stations on the way?
-         * @default false
-         */
-        /**
-         * return tickets?
-         * @default false
-         */
-        tickets?: boolean;
-        /**
-         * return leg shapes?
-         * @default false
-         */
-        polylines?: boolean;
-        /**
-         * parse & expose sub-stops of stations?
-         * @default true
-         */
-        subStops?: boolean;
-        /**
-         * parse & expose entrances of stops/stations?
-         * @default true
-         */
-        entrances?: boolean;
-        /**
-         * parse & expose hints & warnings?
-         * @default true
-         */
-        remarks?: boolean;
-        /**
-         * products
-         * @default undefined
-         */
-        products?: Products;
+        when?: Date | undefined;
     }
     interface LocationsOptions {
         /**
          * find only exact matches?
          * @default true
          */
-        fuzzy?: boolean;
+        fuzzy?: boolean | undefined;
         /**
          * how many search results?
          * @default 10
          */
-        results?: number;
+        results?: number | undefined;
         /**
          * return stops/stations?
          * @default true
          */
-        stops?: boolean;
+        stops?: boolean | undefined;
         /**
          * return addresses
          * @default false
          */
-        addresses?: boolean;
+        addresses?: boolean | undefined;
         /**
          * points of interest
          * @default true
          */
-        poi?: boolean;
+        poi?: boolean | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default false
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * parse & expose lines at each stop/station?
          * @default false
          */
-        linesOfStops?: boolean;
+        linesOfStops?: boolean | undefined;
         /**
          * Language of the results
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface TripOptions {
         /**
          * return stations on the way?
          * @default true
          */
-        stopovers?: boolean;
+        stopovers?: boolean | undefined;
         /**
          * return a shape for the trip?
          * @default false
          */
-        polyline?: boolean;
+        polyline?: boolean | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default true
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * parse & expose hints & warnings?
          * @default true
          */
-        remarks?: boolean;
+        remarks?: boolean | undefined;
         /**
          * Language of the results
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface StopOptions {
         /**
          * parse & expose lines at the stop/station?
          * @default false
          */
-        linesOfStops?: boolean;
+        linesOfStops?: boolean | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default true
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * parse & expose hints & warnings?
          * @default true
          */
-        remarks?: boolean;
+        remarks?: boolean | undefined;
         /**
          * Language of the results
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface DeparturesArrivalsOptions {
         /**
          * departure date, undefined corresponds to Date.Now
          * @default undefined
          */
-        when?: Date;
+        when?: Date | undefined;
         /**
          * only show departures heading to this station
          * @default undefined
          */
-        direction?: string;
+        direction?: string | undefined;
         /**
          * filter by line ID
          * @default undefined
          */
-        line?: string;
+        line?: string | undefined;
         /**
          * show departures for the next n minutes
          * @default 120
          */
-        duration?: number;
+        duration?: number | undefined;
         /**
          * max. number of results; `null` means "whatever HAFAS wants"
          * @default 10
          */
-        results?: number;
+        results?: number | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default true
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * parse & expose lines at the stop/station?
          * @default false
          */
-        linesOfStops?: boolean;
+        linesOfStops?: boolean | undefined;
         /**
          * parse & expose hints & warnings?
          * @default false
          */
-        remarks?: boolean;
+        remarks?: boolean | undefined;
         /**
          * fetch & parse previous/next stopovers?
          * @default false
          */
-        stopovers?: boolean;
+        stopovers?: boolean | undefined;
         /**
          * departures at related stations
          * @default false
          */
-        includeRelatedStations?: boolean;
-        /**
-         * products
-         * @default undefined
-         */
-        products?: Products;
+        includeRelatedStations?: boolean | undefined;
         /**
          * language
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface RefreshJourneyOptions {
         /**
          * return stations on the way?
          * @default false
          */
-        stopovers?: boolean;
+        stopovers?: boolean | undefined;
         /**
          * return a shape for each leg?
          * @default false
          */
-        polylines?: boolean;
+        polylines?: boolean | undefined;
         /**
          * return tickets? only available with some profiles
          * @default false
          */
-        tickets?: boolean;
+        tickets?: boolean | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default true
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * parse & expose hints & warnings?
          * @default true
          */
-        remarks?: boolean;
+        remarks?: boolean | undefined;
         /**
          * language
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface NearByOptions {
         /**
          * maximum number of results
          * @default 8
          */
-        results?: number;
+        results?: number | undefined;
         /**
          * maximum walking distance in meters
          * @default undefined
          */
-        distance?: number;
+        distance?: number | undefined;
         /**
          * return points of interest?
          * @default false
          */
-        poi?: boolean;
+        poi?: boolean | undefined;
         /**
          * return stops/stations?
          * @default true
          */
-        stops?: boolean;
-        /**
-         * products
-         * @default undefined
-         */
-        products?: Products;
+        stops?: boolean | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default true
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * parse & expose lines at each stop/station?
          * @default false
          */
-        linesOfStops?: boolean;
+        linesOfStops?: boolean | undefined;
         /**
          * language
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface ReachableFromOptions {
         /**
          * when
          * @default undefined
          */
-        when?: Date;
+        when?: Date | undefined;
         /**
          * maximum of transfers
          * @default 5
          */
-        maxTransfers?: number;
+        maxTransfers?: number | undefined;
         /**
          * maximum travel duration in minutes, pass `null` for infinite
          * @default 20
          */
-        maxDuration?: number;
+        maxDuration?: number | undefined;
         /**
          * products
          * @default undefined
          */
-        products?: Products;
+        products?: Products | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default true
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
-        /**
-         * return leg shapes?
-         * @default false
-         */
-        polylines?: boolean;
+        entrances?: boolean | undefined;
     }
     interface BoundingBox {
         north: number;
@@ -912,96 +796,78 @@ declare namespace createClient {
          * maximum number of vehicles
          * @default 256
          */
-        results?: number;
+        results?: number | undefined;
         /**
          * nr of frames to compute
          * @default 3
          */
-        frames?: number;
+        frames?: number | undefined;
         /**
          * optionally an object of booleans
          * @default null
          */
-        products?: Products;
+        products?: boolean | object | undefined;
         /**
          * compute frames for the next n seconds
          * @default 20
          */
-        duration?: number;
+        duration?: number | undefined;
         /**
          * parse & expose sub-stops of stations?
          * @default true
          */
-        subStops?: boolean;
+        subStops?: boolean | undefined;
         /**
          * parse & expose entrances of stops/stations?
          * @default true
          */
-        entrances?: boolean;
+        entrances?: boolean | undefined;
         /**
          * return a shape for the trip?
          * @default false
          */
-        polylines?: boolean;
+        polylines?: boolean | undefined;
         /**
          * when
          * @default undefined
          */
-        when?: Date;
-    }
-    interface Filter {
-        type: string;
-        mode: string;
-        value: string;
+        when?: Date | undefined;
     }
     interface TripsByNameOptions {
         /**
          * departure date, undefined corresponds to Date.Now
          * @default undefined
          */
-        when?: Date;
-        fromWhen?: Date;
-        untilWhen?: Date;
-        onlyCurrentlyRunning?: boolean;
-        products?: Products;
-        currentlyStoppingAt?: null;
-        lineName?: string;
-        operatorNames?: string[];
-        additionalFilters?: Filter[];
+        when?: Date | undefined;
     }
     interface RemarksOptions {
-        from?: Date | number;
-        to?: Date | number;
+        from?: Date | number | undefined;
+        to?: Date | number | undefined;
         /**
          * maximum number of remarks
          * @default 100
          */
-        results?: number;
-        products?: Products;
-        /**
-         * return leg shapes? (not supported by all endpoints)
-         * @default false
-         */
-        polylines?: boolean;
+        results?: number | undefined;
+        products?: Products | undefined;
         /**
          * Language of the results
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface LinesOptions {
         /**
          * Language of the results
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface ServerOptions {
         /**
          * Language of the results
          * @default en
          */
-        language?: string;
+        language?: string | undefined;
     }
     interface HafasClient {
         /**
@@ -1010,40 +876,32 @@ declare namespace createClient {
          * @param to uid of station
          * @param options options
          */
-        journeys: (from: string | Station | Stop | Location, to: string | Station | Stop | Location, options: JourneysOptions | undefined) => Promise<Journeys>;
+        journeys: (from: string | Station | Location, to: string | Station | Location, options: JourneysOptions | undefined) => Promise<Journeys>;
         /**
          * refreshes a Journey
          * @param refreshToken refreshToken must be a string, taken from {@link journey#refreshToken}
          * @param options options
          */
-        refreshJourney?: (refreshToken: string, options: RefreshJourneyOptions | undefined) => Promise<Journey>;
+        refreshJourney?: ((refreshToken: string, options: RefreshJourneyOptions | undefined) => Promise<Journey>) | undefined;
         /**
          * Refetch information about a trip
          * @param id trip id, see {@link Leg#tripId}
          * @param name name
          * @param options options
          */
-        trip?: (id: string, name: string, options: TripOptions | undefined) => Promise<Trip>;
+        trip?: ((id: string, name: string, options: TripOptions | undefined) => Promise<Trip>) | undefined;
         /**
          * Retrieves departures
          * @param station uid of station
          * @param options options
          */
-        departures: (station: string | Station | Stop | Location, options: DeparturesArrivalsOptions | undefined) => Promise<ReadonlyArray<Alternative>>;
+        departures: (station: string | Station, options: DeparturesArrivalsOptions | undefined) => Promise<ReadonlyArray<Alternative>>;
         /**
          * Retrieves arrivals
          * @param station uid of station
          * @param options options
          */
-        arrivals: (station: string | Station | Stop | Location, options: DeparturesArrivalsOptions | undefined) => Promise<ReadonlyArray<Alternative>>;
-        /**
-         * Retrieves journeys from trip id to station
-         * @param fromTripId id of trip
-         * @param previousStopover previous stopover
-         * @param to uid of station or Station or Stop
-         * @param options options
-         */
-        journeysFromTrip?: (fromTripId: string, previousStopover: StopOver, to: string | Station | Stop | Location, opt: JourneysFromTripOptions | undefined) => Promise<ReadonlyArray<Journey>>;
+        arrivals: (station: string | Station, options: DeparturesArrivalsOptions | undefined) => Promise<ReadonlyArray<Alternative>>;
         /**
          * Retrieves locations or stops
          * @param name name of station
@@ -1055,7 +913,7 @@ declare namespace createClient {
          * @param id uid of station
          * @param options options for search
          */
-        stop: (id: string | Stop, options: StopOptions | undefined) => Promise<Station | Stop | Location>;
+        stop: (id: string, options: StopOptions | undefined) => Promise<Station | Stop | Location>;
         /**
          * Retrieves nearby stops from location
          * @param location location
@@ -1067,30 +925,30 @@ declare namespace createClient {
          * @param address location
          * @param options options for search
          */
-        reachableFrom?: (address: Location, options: ReachableFromOptions | undefined) => Promise<ReadonlyArray<Duration>>;
+        reachableFrom?: ((address: Location, options: ReachableFromOptions | undefined) => Promise<ReadonlyArray<Duration>>) | undefined;
         /**
          * Retrieves all vehicles currently in an area.
          * @param box area
          * @param options options for search
          */
-        radar?: (box: BoundingBox, options: RadarOptions | undefined) => Promise<ReadonlyArray<Movement>>;
+        radar?: ((box: BoundingBox, options: RadarOptions | undefined) => Promise<ReadonlyArray<Movement>>) | undefined;
         /**
          * Retrieves trips by name.
          * @param lineNameOrFahrtNr string
          * @param options options for search
          */
-        tripsByName?: (lineNameOrFahrtNr: string, options: TripsByNameOptions | undefined) => Promise<ReadonlyArray<Trip>>;
+        tripsByName?: ((lineNameOrFahrtNr: string, options: TripsByNameOptions | undefined) => Promise<ReadonlyArray<Trip>>) | undefined;
         /**
          * Fetches all remarks known to the HAFAS endpoint
          * @param opt RemarksOptions
          */
-        remarks?: (opt: RemarksOptions | undefined) => Promise<ReadonlyArray<Warning>>;
+        remarks?: ((opt: RemarksOptions | undefined) => Promise<ReadonlyArray<Warning>>) | undefined;
         /**
          * Fetches all lines known to the HAFAS endpoint
          * @param query string
          * @param opt LinesOptions
          */
-        lines?: (query: string, opt: LinesOptions | undefined) => Promise<ReadonlyArray<Line>>;
+        lines?: ((query: string, opt: LinesOptions | undefined) => Promise<ReadonlyArray<Line>>) | undefined;
         /**
          * Fetches meta information from the HAFAS endpoint
          * @param opt ServerOptions

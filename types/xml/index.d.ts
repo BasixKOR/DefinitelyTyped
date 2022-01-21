@@ -1,7 +1,6 @@
 // Type definitions for xml 1.0
 // Project: https://github.com/dylang/node-xml
 // Definitions by: Jianrong Yu <https://github.com/YuJianrong>
-//                 Semyon Fomin <https://github.com/semyonf>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 /// <reference types="node" />
@@ -54,7 +53,7 @@ declare namespace xml {
 
 declare function xml(
     xmlObject: xml.XmlObject | xml.XmlObject[],
-    options: { stream: true } & xml.Option,
+    options: { stream: true; indent?: string | undefined },
 ): NodeJS.ReadableStream;
 declare function xml(xmlObject?: xml.XmlObject | xml.XmlObject[], options?: boolean | string | xml.Option): string;
 

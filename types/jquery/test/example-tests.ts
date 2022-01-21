@@ -2557,10 +2557,6 @@ function examples() {
         }, 'json');
     }
 
-    function jQuery_get_6() {
-      $.get('test.php', { name: 'John', time: '2pm' }, 'json');
-    }
-
     function jQuery_get_json_0() {
         (function() {
             var flickerAPI = 'http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?';
@@ -3018,10 +3014,6 @@ function examples() {
                 $('#result').empty().append(content);
             });
         });
-    }
-
-    function jQuery_post_8() {
-      $.post('test.php', { name: 'John', time: '2pm' }, 'json');
     }
 
     function jQuery_proxy_0() {

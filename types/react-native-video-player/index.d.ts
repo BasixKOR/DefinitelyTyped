@@ -1,22 +1,22 @@
 // Type definitions for react-native-video-player 0.10
 // Project: https://github.com/cornedor/react-native-video-player.git
 // Definitions by: Junseong Park <https://github.com/Kweiza>
-//                 mike castleman <https://github.com/mlc>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 import * as React from 'react';
 import { ImageSourcePropType, StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { VideoProperties } from 'react-native-video';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export interface VideoPlayerProps extends Omit<VideoProperties, 'source'> {
+export interface VideoPlayerProps {
     video?: { uri?: string | undefined, mainVer?: number | undefined, patchVer?: number | undefined } | number | undefined;
     thumbnail?: ImageSourcePropType | undefined;
     endThumbnail?: ImageSourcePropType | undefined;
     videoWidth?: number | undefined;
     videoHeight?: number | undefined;
     duration?: number | undefined;
-    showDuration?: boolean;
     autoplay?: boolean | undefined;
+    paused?: boolean | undefined;
     defaultMuted?: boolean | undefined;
     muted?: boolean | undefined;
     style?: StyleProp<ViewStyle> | undefined;
@@ -24,6 +24,7 @@ export interface VideoPlayerProps extends Omit<VideoProperties, 'source'> {
     disableControlsAutoHide?: boolean | undefined;
     disableFullscreen?: boolean | undefined;
     loop?: boolean | undefined;
+    resizeMode?: 'stretch' | 'contain' | 'cover' | 'none' | undefined;
     hideControlsOnStart?: boolean | undefined;
     endWithThumbnail?: boolean | undefined;
     disableSeek?: boolean | undefined;
@@ -48,6 +49,9 @@ export interface VideoPlayerProps extends Omit<VideoProperties, 'source'> {
         playButton?: StyleProp<ViewStyle> | undefined;
         playArrow?: StyleProp<TextStyle> | undefined;
     } | undefined;
+    onEnd?: ((event: any) => any) | undefined;
+    onProgress?: ((event: any) => any) | undefined;
+    onLoad?: ((event: any) => any) | undefined;
     onStart?: (() => any) | undefined;
     onPlayPress?: (() => any) | undefined;
     onHideControls?: (() => any) | undefined;

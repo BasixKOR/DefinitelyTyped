@@ -1,5 +1,4 @@
-import * as angular from 'angular';
-import duScroll = require('angular-scroll');
+
 
 namespace TestApp {
 
@@ -60,6 +59,6 @@ namespace TestApp {
         }
     }
 
-    angular.module('testApp', [duScroll])
+    angular.module('testApp', ['duScroll'])
         .controller('testController', TestController);
 }

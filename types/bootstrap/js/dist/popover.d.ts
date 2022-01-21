@@ -77,7 +77,7 @@ declare class Popover extends BaseComponent {
     /**
      * Toggles the ability for an element’s popover to be shown or hidden.
      */
-    toggleEnabled(): void;
+    toggleEnable(): void;
 
     /**
      * Updates the position of an element’s popover.
@@ -153,7 +153,7 @@ declare namespace Popover {
             | 'toggle'
             | 'enable'
             | 'disable'
-            | 'toggleEnabled'
+            | 'toggleEnable'
             | 'update'
             | 'dispose',
     ) => void;

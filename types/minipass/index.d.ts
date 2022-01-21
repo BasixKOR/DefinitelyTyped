@@ -8,9 +8,7 @@ import { EventEmitter } from 'events';
 
 export = MiniPass;
 
-// Initially was declared with the line below, but minipass types differ slightly
-// declare class MiniPass extends EventEmitter implements NodeJS.WritableStream {
-declare class MiniPass extends EventEmitter {
+declare class MiniPass extends EventEmitter implements NodeJS.WritableStream {
     readonly bufferLength: number;
     readonly flowing: boolean;
     readonly emittedEnd: boolean;

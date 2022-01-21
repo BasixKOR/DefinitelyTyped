@@ -63,7 +63,7 @@ declare namespace yogBigpipe {
 
         renderPagelet(pagelet: Pagelet): void;
 
-        destroy(): this;
+        destroy(): void;
 
         _onPageletDone(pagelet: Pagelet): void;
 

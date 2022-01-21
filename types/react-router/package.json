@@ -7,8 +7,5 @@
                 "ts4.0/*"
             ]
         }
-    },
-    "dependencies": {
-        "@types/history": "^4.7.11"
     }
 }

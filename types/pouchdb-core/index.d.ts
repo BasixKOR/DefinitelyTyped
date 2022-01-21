@@ -546,9 +546,7 @@ declare namespace PouchDB {
     /**
      * Pass this to `PouchDB.plugin()`.
      */
-    type Plugin<PluginProps extends object = {}> = PluginProps | ((db: Database & {
-        -readonly [PluginProp in keyof PluginProps]: PluginProps[PluginProp];
-    }) => void);
+    type Plugin = 'This should be passed to PouchDB.plugin()';
 
     namespace Configuration {
         interface CommonDatabaseConfiguration {
@@ -614,8 +612,8 @@ declare namespace PouchDB {
                 RemoteDatabaseConfiguration;
     }
 
-    interface Static<PluginProps extends object = {}> extends EventEmitter {
-        plugin<PluginSubProps extends object>(plugin: Plugin<PluginSubProps>): Static<PluginProps & PluginSubProps>;
+    interface Static extends EventEmitter {
+        plugin(plugin: Plugin): Static;
 
         version: string;
 
@@ -626,7 +624,7 @@ declare namespace PouchDB {
         debug: debug.IDebug;
 
         new<Content extends {} = {}>(name?: string,
-                                     options?: Configuration.DatabaseConfiguration): Database<Content> & PluginProps;
+                                     options?: Configuration.DatabaseConfiguration): Database<Content>;
 
         /**
          * The returned object is a constructor function that works the same as PouchDB,
@@ -634,7 +632,7 @@ declare namespace PouchDB {
          */
         defaults(options: Configuration.DatabaseConfiguration): {
             new<Content extends {} = {}>(name?: string,
-                                         options?: Configuration.DatabaseConfiguration): Database<Content> & PluginProps;
+                                         options?: Configuration.DatabaseConfiguration): Database<Content>;
         };
     }
 

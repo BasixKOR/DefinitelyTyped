@@ -84,10 +84,6 @@ ineum('ignoreErrorMessages', [/regex/]);
 ineum('ignoreUrls', [/regex/]);
 // $ExpectType void
 ineum('ignoreUserTimings', [/regex/]);
-// $ExpectType void
-ineum('captureHeaders', [/regex/]);
-// $ExpectType void
-ineum('secrets', [/regex/]);
 
 // $ExpectType void
 ineum('apiKey', 'deprecated');

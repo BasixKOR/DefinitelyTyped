@@ -157,7 +157,7 @@ export interface RadioGroupContext {
 
 export class RadioGroup
     extends React.Component<
-        Omit<FieldProps, 'children'> & { children?: ((props: FieldApi) => RenderReturn) | RenderReturn | undefined }
+        FieldProps & { children?: ((props: FieldApi) => RenderReturn) | RenderReturn | undefined }
         >
     implements React.ChildContextProvider<RadioGroupContext> {
     getChildContext(): {
@@ -184,7 +184,7 @@ export const StyledRadio: React.FunctionComponent<StyledProps & React.InputHTMLA
 
 export class StyledRadioGroup
     extends React.Component<
-        Omit<StyledProps, 'children'> & { children?: ((props: FieldApi) => RenderReturn) | RenderReturn | undefined }
+        StyledProps & { children?: ((props: FieldApi) => RenderReturn) | RenderReturn | undefined }
         >
     implements React.ChildContextProvider<RadioGroupContext> {
     getChildContext(): {

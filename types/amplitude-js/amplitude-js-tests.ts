@@ -199,7 +199,6 @@ const defaults: amplitude.Config = {
     saveParamsReferrerOncePerSession: true,
     secureCookie: false,
     sessionTimeout: 30 * 60 * 1000,
-    storage: 'cookies',
     trackingOptions: {
         city: true,
         country: true,

@@ -1116,7 +1116,7 @@ export interface SocketBindInfo {
     socketPath: string;
 }
 
-export type SessionAcceptReject = (() => boolean) | undefined
+type SessionAcceptReject = (() => boolean) | undefined
 
 export interface Session extends events.EventEmitter {
     // Session events

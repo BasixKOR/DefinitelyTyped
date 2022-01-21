@@ -72,7 +72,7 @@ type TypenameOnlyPointer = Readonly<{ __typename: string }>;
 export type MatchPointer = Readonly<{
     __fragmentPropName?: string | null | undefined;
     __module_component?: unknown | undefined;
-    ' $fragmentSpreads': unknown;
+    ' $fragmentRefs': unknown;
 }>;
 
 export type MatchContainerProps<TProps = {}, TFallback = ReactNode> = Readonly<{

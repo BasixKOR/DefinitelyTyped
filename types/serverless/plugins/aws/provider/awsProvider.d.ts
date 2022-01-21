@@ -61,7 +61,6 @@ declare namespace Aws {
         cfnRole?: string | undefined;
         iam?: IamSettings | undefined;
         versionFunctions?: boolean | undefined;
-        architecture?: 'x86_64' | 'arm64' | undefined;
         environment?: Environment | string | undefined;
         endpointType?: 'regional' | 'edge' | 'private' | undefined;
         apiKeys?: string[] | undefined;

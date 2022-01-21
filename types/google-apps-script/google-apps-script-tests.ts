@@ -246,10 +246,6 @@ CardService.newTimePicker().setMinutes(0); // $ExpectType TimePicker
 CardService.newTimePicker().setOnChangeAction(CardService.newAction()); // $ExpectType TimePicker
 CardService.newTimePicker().setTitle(""); // $ExpectType TimePicker
 
-// CardService.newCardBuilder().setDisplayStyle(CardService.DisplayStyle.PEEK)
-CardService.DisplayStyle.PEEK;
-CardService.DisplayStyle.REPLACE;
-
 DriveApp.createShortcut("").getTargetId();
 DriveApp.createFile("", "").moveTo(DriveApp.getFolderById(""));
 
@@ -588,22 +584,4 @@ const handleScopeAction = () => {
     const serialized = response.printJson();
 
     return serialized;
-};
-
-// Analytics Test
-const requestAnalyticsData = (): string => {
-    const gaData = Analytics.Data.Ga.get(
-        'An Id',
-        '2022-01-18',
-        '2022-01-18',
-        'Some metrics',
-        {
-            dimensions: 'Some dimensions',
-        },
-    );
-
-    const totalsForAllResults = gaData.totalsForAllResults;
-    const totalSessions = totalsForAllResults['ga:sessions'];
-
-    return totalSessions;
 };

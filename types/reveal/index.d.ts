@@ -1,4 +1,4 @@
-// Type definitions for Reveal 4.2.0
+// Type definitions for Reveal 4.1.0
 // Project: https://github.com/hakimel/reveal.js/
 // Definitions by: robertop87 <https://github.com/robertop87>,
 //                 Nava2 <https://github.com/Nava2>,
@@ -16,8 +16,8 @@ declare const RevealMath: Plugin;
 declare const RevealZoom: Plugin;
 
 interface RevealStatic {
-    initialize: (config?: RevealOptions) => Promise<any>;
-    configure: (diff?: RevealOptions) => void;
+    initialize: (config: RevealOptions) => Promise<any>;
+    configure: (diff: RevealOptions) => void;
 
     // Navigation
     slide(indexh: number, indexv?: number, f?: number, o?: number): void;
@@ -82,117 +82,77 @@ interface RevealStatic {
 }
 
 interface RevealOptions {
-    // https://github.com/reveal/revealjs.com/blob/master/src/config.md
-
+    // Configuration
     controls?: boolean | undefined;
-    controlsTutorial?: boolean | undefined;
-    controlsLayout?: 'edges' | 'bottom-right' | undefined;
-    controlsBackArrows?: 'faded' | 'hidden' | 'visible' | undefined;
-
     progress?: boolean | undefined;
-
+    // https://github.com/hakimel/reveal.js/#slide-number
     slideNumber?: boolean | string | undefined;
-    showSlideNumber?: 'all' | 'print' | 'speaker';
-
-    hashOneBasedIndex?: boolean | undefined;
-    hash?: boolean | undefined;
-    respondToHashChanges?: boolean | undefined;
 
     history?: boolean | undefined;
+    plugins?: Plugin[] | undefined;
 
+    // https://github.com/hakimel/reveal.js/#keyboard-bindings
     keyboard?: any;
-    keyboardCondition?: any;
-
-    disableLayout?: boolean | undefined;
     overview?: boolean | undefined;
     center?: boolean | undefined;
     touch?: boolean | undefined;
     loop?: boolean | undefined;
     rtl?: boolean | undefined;
-    navigationMode?: 'default' | 'linear' | 'grid' | undefined;
     shuffle?: boolean | undefined;
     fragments?: boolean | undefined;
-    fragmentInURL?: boolean | undefined;
     embedded?: boolean | undefined;
     help?: boolean | undefined;
-    pause?: boolean | undefined;
     showNotes?: boolean | undefined;
-
-    autoPlayMedia?: boolean | null | undefined;
-    preloadIframes?: boolean | null | undefined;
-
-    autoAnimate?: boolean | undefined;
-    autoAnimateMatcher?: any;
-    autoAnimateEasing?: string | undefined;
-    autoAnimateDuration?: number | undefined;
-    autoAnimateUnmatched?: boolean | undefined;
-    autoAnimateStyles?: string[] | undefined;
-
-    autoSlide?: number | false | undefined;
+    autoSlide?: number | undefined;
     autoSlideStoppable?: boolean | undefined;
     autoSlideMethod?: any;
-    defaultTiming?: number | null | undefined;
-
     mouseWheel?: boolean | undefined;
-    previewLinks?: boolean | undefined;
-
-    postMessage?: boolean | undefined;
-    postMessageEvents?: boolean | undefined;
-    focusBodyOnPageVisibilityChange?: boolean | undefined;
-
-    transition?: 'none' | 'fade' | 'slide' | 'convex' | 'concave' | 'zoom' | undefined;
-    transitionSpeed?: 'default' | 'fast' | 'slow' | undefined;
-    backgroundTransition?: 'none' | 'fade' | 'slide' | 'convex' | 'concave' | 'zoom' | undefined;
-
-    pdfMaxPagesPerSlide?: number | undefined;
-    pdfSeparateFragments?: boolean | undefined;
-    pdfPageHeightOffset?: number | undefined;
-
-    viewDistance?: number | undefined;
-    mobileViewDistance?: number | undefined;
-
-    display?: string | undefined;
-
-    hideInactiveCursor?: boolean | undefined;
-    hideCursorTime?: number | undefined;
     hideAddressBar?: boolean | undefined;
+    previewLinks?: boolean | undefined;
+    transition?: string | undefined;
+    transitionSpeed?: string | undefined;
+    backgroundTransition?: string | undefined;
+    viewDistance?: number | undefined;
 
-    plugins?: Plugin[] | undefined;
-
-    // https://github.com/reveal/revealjs.com/blob/master/src/backgrounds.md
+    // https://github.com/hakimel/reveal.js/#parallax-background
+    // Parallax background image
     parallaxBackgroundImage?: string | undefined;
-    parallaxBackgroundSize?: string | undefined;
+
+    // Parallax background size
+    parallaxBackgroundSize?: string | undefined; // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+
+    // Number of pixels to move the parallax background per slide
+    // - Calculated automatically unless specified
+    // - Set to 0 to disable movement along an axis
     parallaxBackgroundHorizontal?: number | undefined;
     parallaxBackgroundVertical?: number | undefined;
 
-    // https://github.com/reveal/revealjs.com/blob/master/src/code.md
-    highlight?: any;
+    rollingLinks?: boolean | undefined;
+    theme?: string | undefined;
 
-    // https://github.com/reveal/revealjs.com/blob/master/src/markdown.md
-    markdown?: any;
-
-    // https://github.com/reveal/revealjs.com/blob/master/src/math.md
-    katex?: any;
-    mathjax2?: any;
-    mathjax3?: any;
-
-    // https://github.com/reveal/revealjs.com/blob/master/src/presentation-size.md
+    // Presentation Size
+    // https://github.com/hakimel/reveal.js/#presentation-size
     width?: number | string | undefined;
     height?: number | string | undefined;
     margin?: number | string | undefined;
     minScale?: number | string | undefined;
     maxScale?: number | string | undefined;
 
-    // https://github.com/reveal/multiplex
-    multiplex?: MultiplexConfig | undefined;
-
-    // https://github.com/reveal/revealjs.com/blob/master/src/plugins.md
+    // Dependencies
+    // https://github.com/hakimel/reveal.js/#dependencies
     dependencies?: RevealDependency[] | undefined;
 
-    // NOTE: could no longer find the below fields in the reveal.js docs
+    // Exposes the reveal.js API through window.postMessage
+    postMessage?: boolean | undefined;
+
+    // Dispatches all reveal.js events to the parent window through postMessage
+    postMessageEvents?: boolean | undefined;
+
+    // https://github.com/hakimel/reveal.js/#multiplexing
+    multiplex?: MultiplexConfig | undefined;
+
+    // https://github.com/hakimel/reveal.js/#mathjax
     math?: MathConfig | undefined;
-    rollingLinks?: boolean | undefined;
-    theme?: string | undefined;
 }
 
 // https://github.com/hakimel/reveal.js/#slide-changed-event

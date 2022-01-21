@@ -16,13 +16,9 @@ type WritableStream<T = any> = unknown;
 
 /// https://docs.nova.app/api-reference/assistants-registry/
 
-type AssistantsRegistrySelector = string | string[] | { syntax: string } | { syntax: string }[];
+type AssistantsRegistrySelector = string | { syntax: string };
 
 interface AssistantsRegistry {
-    registerColorAssistant(
-      selector: AssistantsRegistrySelector,
-      object: ColorAssistant,
-    ): Disposable;
     registerCompletionAssistant(
         selector: AssistantsRegistrySelector,
         object: CompletionAssistant,
@@ -37,11 +33,6 @@ interface AssistantsRegistry {
 }
 
 type AssistantArray<T> = ReadonlyArray<T> | Promise<ReadonlyArray<T>>;
-
-interface ColorAssistant {
-    provideColors(editor: TextEditor, context: ColorInformationContext): AssistantArray<ColorInformation>;
-    provideColorPresentations(color: Color, editor: TextEditor, context: ColorPresentationContext): AssistantArray<ColorPresentation>;
-}
 
 interface CompletionAssistant {
     provideCompletionItems(editor: TextEditor, context: CompletionContext): AssistantArray<CompletionItem>;
@@ -88,25 +79,14 @@ declare interface Clipboard {
 
 /// https://docs.nova.app/api-reference/color/
 
-declare enum ColorFormat {
-    rgb = 'rgb',
-    hsl = 'hsl',
-    hsb = 'hsb',
-    displayP3 = 'p3',
-}
+type ColorFormat = 'rgb' | 'hsl' | 'hsb' | 'p3' | 'hex';
+type ColorComponents = [number, number, number, number];
 
 declare class Color {
-    constructor(format: ColorFormat, components: number[]);
+    constructor(format: ColorFormat, components: ColorComponents);
 
-    static rgb(red: number, green: number, blue: number, alpha?: number): any;
-    static hsl(hue: number, saturation: number, luminance: number, alpha?: number): any;
-    static hsb(hue: number, saturation: number, brightness: number, alpha?: number): any;
-    static displayP3(red: number, green: number, blue: number, alpha?: number): any;
-
-    convert(format: ColorFormat): Color;
-
-    readonly format: ColorFormat;
-    readonly components: number[];
+    format: ColorFormat;
+    components: ColorComponents;
 }
 
 /// https://docs.nova.app/api-reference/commands-registry/
@@ -128,50 +108,6 @@ interface CommandsRegistry {
     register<T>(name: string, callable: (this: T, ...params: any[]) => void, thisValue: T): Disposable;
     invoke(name: string, ...arguments: Transferrable[]): Promise<unknown>;
     invoke(name: string, textEditor: TextEditor, ...arguments: Transferrable[]): Promise<unknown>;
-}
-
-/// https://docs.nova.app/api-reference/color-information-context/
-
-interface ColorInformationContext {
-  readonly candidates: ColorCandidate[];
-}
-
-/// https://docs.nova.app/api-reference/color-candidate/
-
-interface ColorCandidate {
-  range: Range;
-  text: string;
-}
-
-/// https://docs.nova.app/api-reference/color-information/
-
-declare class ColorInformation {
-  constructor(range: Range, color: Color, kind?: string);
-
-  color: Color;
-  kind?: string;
-  range: Range;
-  usesFloats?: boolean;
-  format?: ColorFormat;
-}
-
-/// https://docs.nova.app/api-reference/color-presentation-context/
-
-interface ColorPresentationContext {
-  readonly range: Range;
-}
-
-/// https://docs.nova.app/api-reference/color-presentation/
-
-declare class ColorPresentation {
-  constructor(label: string, kind?: string)
-
-  additionalTextEdits: TextEdit[];
-  format?: ColorFormat;
-  insertText?: string;
-  kind: string;
-  label: string;
-  usesFloats?: boolean;
 }
 
 /// https://docs.nova.app/api-reference/completion-context/
@@ -551,7 +487,12 @@ declare class LanguageClient {
     constructor(
         identifier: string,
         name: string,
-        serverOptions: ServerOptions,
+        serverOptions: {
+            type?: 'stdio' | 'socket' | 'pipe';
+            path: string;
+            args?: string[];
+            env?: { [key: string]: string };
+        },
         clientOptions: { initializationOptions?: any; syntaxes: string[] },
     );
 
@@ -566,13 +507,6 @@ declare class LanguageClient {
     sendNotification(method: string, parameters?: unknown): void;
     start(): void;
     stop(): void;
-}
-
-interface ServerOptions {
-  type?: 'stdio' | 'socket' | 'pipe';
-  path: string;
-  args?: string[];
-  env?: { [key: string]: string };
 }
 
 /// https://docs.nova.app/api-reference/notification-center/

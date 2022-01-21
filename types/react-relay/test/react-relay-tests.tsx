@@ -163,7 +163,7 @@ type Story_story = {
     readonly id: string;
     readonly text: string;
     readonly isPublished: boolean;
-    readonly ' $fragmentType': 'Story_story';
+    readonly ' $refType': 'Story_story';
 };
 
 const Story = (() => {
@@ -295,15 +295,15 @@ type FeedStories_feed = {
     readonly edges: ReadonlyArray<{
         readonly node: {
             readonly id: string;
-            readonly ' $fragmentSpreads': FragmentRefs<'Story_story' | 'FeedStories_feed'>;
+            readonly ' $fragmentRefs': FragmentRefs<'Story_story' | 'FeedStories_feed'>;
         };
-        readonly ' $fragmentSpreads': FragmentRefs<'FeedStory_edges'>;
+        readonly ' $fragmentRefs': FragmentRefs<'FeedStory_edges'>;
     }>;
-    readonly ' $fragmentType': 'FeedStories_feed';
+    readonly ' $refType': 'FeedStories_feed';
 };
 type FeedStory_edges = ReadonlyArray<{
     readonly publishedAt: string;
-    readonly ' $fragmentType': 'FeedStory_edges';
+    readonly ' $refType': 'FeedStory_edges';
 }>;
 
 const Feed = (() => {
@@ -414,9 +414,9 @@ type UserFeed_user = {
             readonly endCursor?: string | null | undefined;
             readonly hasNextPage: boolean;
         };
-        readonly ' $fragmentSpreads': FragmentRefs<'FeedStories_feed'>;
+        readonly ' $fragmentRefs': FragmentRefs<'FeedStories_feed'>;
     };
-    readonly ' $fragmentType': 'UserFeed_user';
+    readonly ' $refType': 'UserFeed_user';
 };
 () => {
     interface Props {

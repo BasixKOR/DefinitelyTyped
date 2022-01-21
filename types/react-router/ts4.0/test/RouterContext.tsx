@@ -51,7 +51,7 @@ const MultiStepSignup: React.FC = () => {
     }, [location.pathname]);
 
     const handleNextStep = React.useCallback(
-        (event: React.FormEvent) => {
+        event => {
             event.preventDefault();
 
             if (isLastStep) {

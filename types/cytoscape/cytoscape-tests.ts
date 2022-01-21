@@ -804,17 +804,3 @@ cy.elements().bfs({
         }
     },
 });
-
-// Check extension registration: https://js.cytoscape.org/#extensions/registration
-
-// $ExpectType void
-cytoscape("core", "prop", () => {});
-// $ExpectType unknown
-cytoscape("core", "name");
-
-const myExt: cytoscape.Ext = (cy) => {
-    // $ExpectType void
-    cy("core", "prop", () => {});
-    // $ExpectType unknown
-    cy("core", "prop");
-};

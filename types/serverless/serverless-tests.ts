@@ -174,7 +174,6 @@ const awsServerless: Aws.Serverless = {
         rolePermissionsBoundary: 'testrolePermissionsBoundary',
         cfnRole: 'testcfnRole',
         versionFunctions: true,
-        architecture: 'x86_64',
         environment: {
             testenvironmentkey: 'testenvironmentvalue'
         },

@@ -98,27 +98,22 @@ window.addEventListener('obsRecordingUnpaused', (event: CustomEvent<null>) => {
     event.detail;
 });
 
-window.addEventListener('obsReplaybufferStarting', (event: CustomEvent<null>) => {
+window.addEventListener('obsReplayBufferStarting', (event: CustomEvent<null>) => {
     event;
     event.detail;
 });
 
-window.addEventListener('obsReplaybufferStarted', (event: CustomEvent<null>) => {
+window.addEventListener('obsReplayBufferStarted', (event: CustomEvent<null>) => {
     event;
     event.detail;
 });
 
-window.addEventListener('obsReplaybufferStopping', (event: CustomEvent<null>) => {
+window.addEventListener('obsReplayBufferStopping', (event: CustomEvent<null>) => {
     event;
     event.detail;
 });
 
-window.addEventListener('obsReplaybufferStopped', (event: CustomEvent<null>) => {
-    event;
-    event.detail;
-});
-
-window.addEventListener('obsReplaybufferSaved', (event: CustomEvent<null>) => {
+window.addEventListener('obsReplayBufferStopped', (event: CustomEvent<null>) => {
     event;
     event.detail;
 });

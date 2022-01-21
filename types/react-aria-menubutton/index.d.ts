@@ -80,7 +80,7 @@ export interface ButtonProps<T extends HTMLElement>
 export const Button: React.ForwardRefExoticComponent<ButtonProps<HTMLElement>>;
 
 export interface MenuProps<T extends HTMLElement>
-    extends Omit<React.HTMLProps<T>, 'children'> {
+    extends React.HTMLProps<T> {
     /**
      * The HTML tag for this element. Default: 'div'.
      */
