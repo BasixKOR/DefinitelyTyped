@@ -2240,22 +2240,161 @@ async function testCookie() {
     });
 }
 
-// https://developer.chrome.com/docs/extensions/reference/management
-async function testManagementForPromise() {
-    await chrome.management.setEnabled("id1", true);
-    await chrome.management.getPermissionWarningsById("id1");
-    await chrome.management.get("id1");
-    await chrome.management.getAll();
-    await chrome.management.getPermissionWarningsByManifest("manifestStr1");
-    await chrome.management.launchApp("id1");
-    await chrome.management.uninstall("id1");
-    await chrome.management.uninstall("id1", {});
-    await chrome.management.getSelf();
-    await chrome.management.uninstallSelf({});
-    await chrome.management.uninstallSelf();
-    await chrome.management.createAppShortcut("id1");
-    await chrome.management.setLaunchType("id1", "launchType1");
-    await chrome.management.generateAppForLink("url1", "title1");
+// https://developer.chrome.com/docs/extensions/reference/api/management
+async function testManagement() {
+    chrome.management.ExtensionDisabledReason.PERMISSIONS_INCREASE === "permissions_increase";
+    chrome.management.ExtensionDisabledReason.UNKNOWN === "unknown";
+
+    chrome.management.ExtensionInstallType.ADMIN === "admin";
+    chrome.management.ExtensionInstallType.DEVELOPMENT === "development";
+    chrome.management.ExtensionInstallType.NORMAL === "normal";
+    chrome.management.ExtensionInstallType.OTHER === "other";
+    chrome.management.ExtensionInstallType.SIDELOAD === "sideload";
+
+    chrome.management.ExtensionType.EXTENSION === "extension";
+    chrome.management.ExtensionType.HOSTED_APP === "hosted_app";
+    chrome.management.ExtensionType.LEGACY_PACKAGED_APP === "legacy_packaged_app";
+    chrome.management.ExtensionType.LOGIN_SCREEN_EXTENSION === "login_screen_extension";
+    chrome.management.ExtensionType.PACKAGE_APP === "package_app";
+    chrome.management.ExtensionType.THEME === "theme";
+
+    chrome.management.LaunchType.OPEN_AS_PINNED_TAB === "OPEN_AS_PINNED_TAB";
+    chrome.management.LaunchType.OPEN_AS_REGULAR_TAB === "OPEN_AS_REGULAR_TAB";
+    chrome.management.LaunchType.OPEN_AS_WINDOW === "OPEN_AS_WINDOW";
+    chrome.management.LaunchType.OPEN_FULL_SCREEN === "OPEN_FULL_SCREEN";
+
+    const id = "id";
+    const title = "title";
+    const url = "https://example.com";
+
+    chrome.management.createAppShortcut(id); // $ExpectType Promise<void>
+    chrome.management.createAppShortcut(id, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.management.createAppShortcut(id, () => {}).then(() => {});
+
+    chrome.management.generateAppForLink(url, title); // $ExpectType Promise<ExtensionInfo>
+    chrome.management.generateAppForLink(url, title, (result) => { // $ExpectType void
+        result.appLaunchUrl; // $ExpectType string | undefined
+        result.availableLaunchTypes; // $ExpectType ("OPEN_AS_PINNED_TAB" | "OPEN_AS_REGULAR_TAB" | "OPEN_AS_WINDOW" | "OPEN_FULL_SCREEN")[] | undefined
+        result.description; // $ExpectType string
+        result.disabledReason; // $ExpectType "unknown" | "permissions_increase" | undefined
+        result.enabled; // $ExpectType boolean
+        result.homepageUrl; // $ExpectType string | undefined
+        result.hostPermissions; // $ExpectType string[]
+        result.icons; // $ExpectType IconInfo[] | undefined
+        result.icons![0].size; // $ExpectType number
+        result.icons![0].url; // $ExpectType string
+        result.id; // $ExpectType string
+        result.installType; // $ExpectType "admin" | "development" | "normal" | "other" | "sideload"
+        result.isApp; // $ExpectType boolean
+        result.launchType; // $ExpectType "OPEN_AS_PINNED_TAB" | "OPEN_AS_REGULAR_TAB" | "OPEN_AS_WINDOW" | "OPEN_FULL_SCREEN" | undefined
+        result.mayDisable; // $ExpectType boolean
+        result.mayEnable; // $ExpectType boolean | undefined
+        result.name; // $ExpectType string
+        result.offlineEnabled; // $ExpectType boolean
+        result.optionsUrl; // $ExpectType string
+        result.permissions; // $ExpectType string[]
+        result.shortName; // $ExpectType string
+        result.type; // $ExpectType "extension" | "hosted_app" | "legacy_packaged_app" | "login_screen_extension" | "package_app" | "theme"
+        result.updateUrl; // $ExpectType string | undefined
+        result.version; // $ExpectType string
+        result.versionName; // $ExpectType string | undefined
+    });
+    // @ts-expect-error
+    chrome.management.generateAppForLink(url, title, () => {}).then(() => {});
+
+    chrome.management.get(id); // $ExpectType Promise<ExtensionInfo>
+    chrome.management.get(id, (result) => { // $ExpectType void
+        result; // $ExpectType ExtensionInfo
+    });
+    // @ts-expect-error
+    chrome.management.get(id, () => {}).then(() => {});
+
+    chrome.management.getAll(); // $ExpectType Promise<ExtensionInfo[]>
+    chrome.management.getAll((result) => { // $ExpectType void
+        result; // $ExpectType ExtensionInfo[]
+    });
+    // @ts-expect-error
+    chrome.management.getAll(() => {}).then(() => {});
+
+    chrome.management.getPermissionWarningsById(id); // $ExpectType Promise<string[]>
+    chrome.management.getPermissionWarningsById(id, (permissionWarnings) => { // $ExpectType void
+        permissionWarnings; // $ExpectType string[]
+    });
+    // @ts-expect-error
+    chrome.management.getPermissionWarningsById(id, () => {}).then(() => {});
+
+    const manifestStr = "{}";
+
+    chrome.management.getPermissionWarningsByManifest(manifestStr); // $ExpectType Promise<string[]>
+    chrome.management.getPermissionWarningsByManifest(manifestStr, (permissionWarnings) => { // $ExpectType void
+        permissionWarnings; // $ExpectType string[]
+    });
+    // @ts-expect-error
+    chrome.management.getPermissionWarningsByManifest(manifestStr, () => {}).then(() => {});
+
+    chrome.management.getSelf(); // $ExpectType Promise<ExtensionInfo>
+    chrome.management.getSelf((result) => { // $ExpectType void
+        result; // $ExpectType ExtensionInfo
+    });
+    // @ts-expect-error
+    chrome.management.getSelf(() => {}).then(() => {});
+
+    chrome.management.installReplacementWebApp(); // $ExpectType Promise<void>
+    chrome.management.installReplacementWebApp(() => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.management.installReplacementWebApp(() => {}).then(() => {});
+
+    chrome.management.launchApp(id); // $ExpectType Promise<void>
+    chrome.management.launchApp(id, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.management.launchApp(id, () => {}).then(() => {});
+
+    chrome.management.setEnabled(id, true); // $ExpectType Promise<void>
+    chrome.management.setEnabled(id, true, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.management.setEnabled(id, true, () => {}).then(() => {});
+
+    const launchType = "OPEN_AS_PINNED_TAB";
+
+    chrome.management.setLaunchType(id, launchType); // $ExpectType Promise<void>
+    chrome.management.setLaunchType(id, launchType, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.management.setLaunchType(id, launchType, () => {}).then(() => {});
+
+    const options: chrome.management.UninstallOptions = {
+        showConfirmDialog: true,
+    };
+
+    chrome.management.uninstall(id); // $ExpectType Promise<void>
+    chrome.management.uninstall(id, options); // $ExpectType Promise<void>
+    chrome.management.uninstall(id, () => void 0); // $ExpectType void
+    chrome.management.uninstall(id, options, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.management.uninstall(id, () => {}).then(() => {});
+
+    chrome.management.uninstallSelf(); // $ExpectType Promise<void>
+    chrome.management.uninstallSelf(options); // $ExpectType Promise<void>
+    chrome.management.uninstallSelf(() => void 0); // $ExpectType void
+    chrome.management.uninstallSelf(options, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.management.uninstallSelf(() => {}).then(() => {});
+
+    checkChromeEvent(chrome.management.onDisabled, (info) => {
+        info; // $ExpectType ExtensionInfo
+    });
+
+    checkChromeEvent(chrome.management.onEnabled, (info) => {
+        info; // $ExpectType ExtensionInfo
+    });
+
+    checkChromeEvent(chrome.management.onInstalled, (info) => {
+        info; // $ExpectType ExtensionInfo
+    });
+
+    checkChromeEvent(chrome.management.onUninstalled, (id) => {
+        id; // $ExpectType string
+    });
 }
 
 // https://developer.chrome.com/docs/extensions/reference/api/scripting
@@ -4146,9 +4285,16 @@ function testI18n() {
     chrome.i18n.getUILanguage(); // $ExpectType string
 }
 
-async function testPageCapture() {
-    chrome.pageCapture.saveAsMHTML({ tabId: 0 }, (data: Blob | undefined) => {}); // $ExpectType void
-    await chrome.pageCapture.saveAsMHTML({ tabId: 0 }); // $ExpectType Blob | undefined
+// https://developer.chrome.com/docs/extensions/reference/api/pageCapture
+function testPageCapture() {
+    const details = { tabId: 0 };
+
+    chrome.pageCapture.saveAsMHTML(details); // $ExpectType Promise<Blob | undefined>
+    chrome.pageCapture.saveAsMHTML(details, (data) => { // $ExpectType void
+        data; // $ExpectType Blob | undefined
+    });
+    // @ts-expect-error
+    chrome.pageCapture.saveAsMHTML(details, () => {}).then(() => {});
 }
 
 // https://developer.chrome.com/docs/extensions/reference/api/downloads
@@ -5408,31 +5554,48 @@ function testFileSystemProvider() {
     });
 }
 
-// https://developer.chrome.com/docs/extensions/reference/sessions/
+// https://developer.chrome.com/docs/extensions/reference/api/sessions
 function testSessions() {
-    const myMax = { maxResults: 1 };
-    chrome.sessions.getDevices(devices => {});
-    chrome.sessions.getDevices({}, devices => {});
-    chrome.sessions.getDevices(myMax, devices => {});
-    chrome.sessions.getRecentlyClosed(sessions => {});
-    chrome.sessions.getRecentlyClosed({}, sessions => {});
-    chrome.sessions.getRecentlyClosed(myMax, sessions => {});
-    chrome.sessions.restore(restoredSession => {});
-    chrome.sessions.restore("myString", restoredSession => {});
-    chrome.sessions.onChanged.addListener(() => {});
-}
+    chrome.sessions.MAX_SESSION_RESULTS === 25;
 
-// https://developer.chrome.com/docs/extensions/reference/sessions/
-async function testSessionsForPromise() {
-    const myMax = { maxResults: 1 };
-    await chrome.sessions.getDevices();
-    await chrome.sessions.getDevices({});
-    await chrome.sessions.getDevices(myMax);
-    await chrome.sessions.getRecentlyClosed();
-    await chrome.sessions.getRecentlyClosed({});
-    await chrome.sessions.getRecentlyClosed(myMax);
-    await chrome.sessions.restore();
-    await chrome.sessions.restore("myString");
+    const filter: chrome.sessions.Filter = { maxResults: 1 };
+
+    chrome.sessions.getDevices(); // $ExpectType Promise<Device[]>
+    chrome.sessions.getDevices(filter); // $ExpectType Promise<Device[]>
+    chrome.sessions.getDevices(([device]) => { // $ExpectType void
+        device.deviceName; // $ExpectType string
+        device.sessions; // $ExpectType Session[]
+    });
+    chrome.sessions.getDevices(filter, devices => { // $ExpectType void
+        devices; // $ExpectType Device[]
+    });
+    // @ts-expect-error
+    chrome.sessions.getDevices(() => {}).then(() => {});
+
+    chrome.sessions.getRecentlyClosed(); // $ExpectType Promise<Session[]>
+    chrome.sessions.getRecentlyClosed(filter); // $ExpectType Promise<Session[]>
+    chrome.sessions.getRecentlyClosed((sessions) => { // $ExpectType void
+        sessions; // $ExpectType Session[]
+    });
+    chrome.sessions.getRecentlyClosed(filter, sessions => { // $ExpectType void
+        sessions; // $ExpectType Session[]
+    });
+    // @ts-expect-error
+    chrome.sessions.getRecentlyClosed(() => {}).then(() => {});
+
+    const sessionId = "id";
+    chrome.sessions.restore(); // $ExpectType Promise<Session>
+    chrome.sessions.restore(sessionId); // $ExpectType Promise<Session>
+    chrome.sessions.restore((restoredSession) => { // $ExpectType void
+        restoredSession.lastModified; // $ExpectType number
+        restoredSession.tab; // $ExpectType Tab | undefined
+        restoredSession.window; // $ExpectType Window | undefined
+    });
+    chrome.sessions.restore(sessionId, (restoredSession) => { // $ExpectType void
+        restoredSession; // $ExpectType Session
+    });
+
+    checkChromeEvent(chrome.sessions.onChanged, () => void 0);
 }
 
 // https://developer.chrome.com/docs/extensions/reference/api/sidePanel
@@ -7115,111 +7278,64 @@ function testPrivacy() {
 
 // https://developer.chrome.com/docs/extensions/reference/api/readingList
 function testReadingList() {
-    const {
-        addEntry,
-        query,
-        removeEntry,
-        updateEntry,
-        onEntryAdded,
-        onEntryRemoved,
-        onEntryUpdated,
-    } = chrome.readingList;
-
-    const testAddEntry = () => {
-        const entry = {
-            hasBeenRead: true,
-            title: "title",
-            url: "url",
-        };
-
-        // @ts-expect-error
-        addEntry();
-
-        // @ts-expect-error
-        addEntry({});
-        addEntry(entry); // $ExpectType Promise<void>
-
-        // @ts-expect-error
-        addEntry({}, () => {});
-        addEntry(entry, () => {}); // $ExpectType void
-
-        // @ts-expect-error
-        addEntry(entry, () => {}).then(() => {});
+    const entry: chrome.readingList.AddEntryOptions = {
+        hasBeenRead: true,
+        title: "title",
+        url: "url",
     };
 
-    const testQuery = () => {
-        const info = {
-            hasBeenRead: true,
-            title: "title",
-            url: "url",
-        };
+    chrome.readingList.addEntry(entry); // $ExpectType Promise<void>
+    chrome.readingList.addEntry(entry, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.readingList.addEntry(entry, () => {}).then(() => {});
 
-        // @ts-expect-error
-        query();
-
-        query({}); // $ExpectType Promise<ReadingListEntry[]>
-        query(info); // $ExpectType Promise<ReadingListEntry[]>
-
-        query({}, () => {}); // $ExpectType void
-        query(info, () => {}); // $ExpectType void
-
-        // @ts-expect-error
-        query(info, () => {}).then(() => {});
+    const queryInfo: chrome.readingList.QueryInfo = {
+        hasBeenRead: true,
+        title: "title",
+        url: "url",
     };
 
-    const testRemoveEntry = () => {
-        const info = {
-            url: "url",
-        };
+    chrome.readingList.query(queryInfo); // $ExpectType Promise<ReadingListEntry[]>
+    chrome.readingList.query(queryInfo, ([entry]) => { // $ExpectType void
+        entry; // $ExpectType ReadingListEntry
+        entry.creationTime; // $ExpectType number
+        entry.hasBeenRead; // $ExpectType boolean
+        entry.lastUpdateTime; // $ExpectType number
+        entry.title; // $ExpectType string
+        entry.url; // $ExpectType string
+    });
+    // @ts-expect-error
+    chrome.readingList.query(queryInfo, () => {}).then(() => {});
 
-        // @ts-expect-error
-        removeEntry();
-
-        // @ts-expect-error
-        removeEntry({});
-        removeEntry(info); // $ExpectType Promise<void>
-
-        // @ts-expect-error
-        removeEntry({}, () => {});
-        removeEntry(info, () => {}); // $ExpectType void
-
-        // @ts-expect-error
-        removeEntry(info, () => {}).then(() => {});
+    const removeInfo: chrome.readingList.RemoveOptions = {
+        url: "url",
     };
 
-    const testUpdateEntry = () => {
-        const info = {
-            hasBeenRead: true,
-            title: "title",
-            url: "url",
-        };
+    chrome.readingList.removeEntry(removeInfo); // $ExpectType Promise<void>
+    chrome.readingList.removeEntry(removeInfo, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.readingList.removeEntry(removeInfo, () => {}).then(() => {});
 
-        // @ts-expect-error
-        updateEntry();
-
-        // @ts-expect-error
-        updateEntry({});
-        updateEntry({ url: "url" }); // $ExpectType Promise<void>
-        updateEntry(info); // $ExpectType Promise<void>
-
-        // @ts-expect-error
-        updateEntry({}, () => {});
-        updateEntry({ url: "url" }, () => {}); // $ExpectType void
-        updateEntry(info, () => {}); // $ExpectType void
-
-        // @ts-expect-error
-        updateEntry(info, () => {}).then(() => {});
+    const updateInfo: chrome.readingList.UpdateEntryOptions = {
+        hasBeenRead: true,
+        title: "title",
+        url: "url",
     };
 
-    checkChromeEvent(onEntryAdded, (entry) => {
+    chrome.readingList.updateEntry(updateInfo); // $ExpectType Promise<void>
+    chrome.readingList.updateEntry(updateInfo, () => void 0); // $ExpectType void
+    // @ts-expect-error
+    chrome.readingList.updateEntry(updateInfo, () => {}).then(() => {});
+
+    checkChromeEvent(chrome.readingList.onEntryAdded, (entry) => {
         entry; // $ExpectType ReadingListEntry
     });
 
-    checkChromeEvent(onEntryRemoved, (entry) => {
+    checkChromeEvent(chrome.readingList.onEntryRemoved, (entry) => {
         entry; // $ExpectType ReadingListEntry
     });
 
-    checkChromeEvent(onEntryUpdated, (entry) => {
+    checkChromeEvent(chrome.readingList.onEntryUpdated, (entry) => {
         entry; // $ExpectType ReadingListEntry
     });
 }
